@@ -18,7 +18,7 @@ En esta fase, vamos a crear una base de datos local con datos de prueba, y vamos
 4. Regresar a SQL Server Management Studio y dar clic derecho en nuestra base de datos "TitanicDB".
 5. Dar clic en "Tasks" y dar clic en "Import Flat File".
 6. Seleccionar la ruta del archivo que acabamos de descargar y escoger el noombre de la tabla TitanicData
-[TitanicData](/images/Step6.png)
+![TitanicData](/images/Step6.png)
 7. Dar clic en "Next" en los siguientes pasos (Preview Data, Modify Columns, Summary, Result).
 8. Una vez que la información se haya importado, aparecerá un resultado de "Success".
 > Ya tenemos  una base de datos con una tabla e información de prueba, ahora vamos a migrarla a la nube.
@@ -30,31 +30,31 @@ Si un downtime no es una posibilidad, podemos realizar la migración mediante el
 Lo primero que tenemos que hacer, es crear nuestro servidor y base de datos en Azure.
 
 9. Ingresar al portal de Azure y buscar "SQL Server (logical server)" y configurarlo.
-[TitanicData](/images/Step8.png)
+![TitanicData](/images/Step8.png)
 
 >Para poder acceder a las bases de datos que incluyamos en este servidor lógico, necesitamos configurar nuestro firewall. 
 10. Dar clic en la opción "Firewall/Virtual Networks" y agregar nuestra dirección IP para poder conectarnos a el.
-[TitanicData](/images/Step9.png)
+![TitanicData](/images/Step9.png)
 
 >Ahora tenemos que crear la base de datos a la que migraremos el esquema y los datos. Esta base se creará en el servidor lógico que acabamos de desplegar.
 11. En el portal de Azure, buscar "SQL Database" y configurarlo.
-[TitanicData](/images/Step10.png)
+![TitanicData](/images/Step10.png)
 12. Una vez que se haya generado nuestra base de datos, obtendremos el nombre del servidor para conectarnos posteriormente con la herramienta de migración.
-[TitanicData](/images/Step10.png)
+![TitanicData](/images/Step10.png)
 
 13. Descargar e instalar el asistente de migración de la siguiente liga: [Asistente de migración](https://www.microsoft.com/en-us/download/confirmation.aspx?id=53595)
 14. Cuando se haya instalado la herramienta, vamos a agregar un nuevo proyecto de Migración.
-[TitanicData](/images/Step11.png)
+![TitanicData](/images/Step11.png)
 15. Conectárnos a nuestro servidor local. Elegir las opciones de "Encriptar información" y "Confiar en el certificado del servidor"
-[TitanicData](/images/Step12.png)
+![TitanicData](/images/Step12.png)
 16. Seleccionar la base de datos que queremos migrar.
-[TitanicData](/images/Step13.png)
+![TitanicData](/images/Step13.png)
 17. Seleccionar los objetos a migrar (En este caso solo tenemos 1 tabla)
-[TitanicData](/images/Step14.png)
+![TitanicData](/images/Step14.png)
 18. Conectarnos a nuestro servidor en Azure. Dar clic en "Deploy Schema" y por último en "Migrate data". (El nombre del servidor lo obtuvimos en el paso 12)
-[TitanicData](/images/Step15.png)
+![TitanicData](/images/Step15.png)
 > Una vez que se hayan migrado los datos, nos aparecerá un mensaje de éxito
-[TitanicData](/images/Step16.png)
+![TitanicData](/images/Step16.png)
 19. Ahora nos podemos conectar a la base de datos en Azure a través de SQL Server Management Studio y verificar que la tabla y los datos se encuentren ahí.
 
 > Ahora que tenemos nuestra base de datos en la nube, vamos a generar un modelo de predicción sobre la probabilidad de supervivencia de un pasajero dependiendo de diferentes variables en nuestro set de datos.
@@ -84,68 +84,68 @@ GO
 
 21. Ya que tenemos esta tabla, vamos a Azure ML Studio (https://studio.azureml.net/) e ingresamos con nuestras credenciales de Azure.
 22. En Azure ML Studio, vamos a seleccionar un Expermiento en Blanco
-[TitanicData](/images/Step22.png)
+![TitanicData](/images/Step22.png)
 23. Renombramos el modelo a "Titanic Prediction".
 > Ahora, vamos a agregar nuestro set de información para poder entrenar a nuestro modelo. (Tomaremos como fuente de datos el CSV TitanicData.csv)
 24. En la esquina inferior izquierda dar clic en "+ New". Seleccionar la opción "DATASET" y por último "From Local File".
-[TitanicData](/images/Step24.png)
+![TitanicData](/images/Step24.png)
 25. En el formulario que aparece, seleccionar nuestro archivo local de TitanicData.csv, renombrar el DATASET a "TitanicData" y aceptar.
 26. Una vez que nuestra información se haya cargado, en el menú izquierdo seleccionamos "Saved Data Sets", "My Data Sets" y arrastramos TitanicData al lienzo.
-[TitanicData](/images/Step26.png)
+![TitanicData](/images/Step26.png)
 
 > Los siguientes pasos serán para limpiar nuestra información
 
 27. En el menú izquierdo, dar clic en Data Transformation, Manipulation y buscar "Select Columns in Dataset". Arrastrarlo al lienzo bajo nuestra fuente de datos.
 28. Conectar los módulos. En el menú derecho dar clic en "Launch Column Selector".
-[TitanicData](/images/Step27.png)
+![TitanicData](/images/Step27.png)
 29. Configurar el módulo para excluir las columnas "PassengerId, Name, Cabin, Ticket". (Estas columnas se excluyen ya que no se consideran como una variable que pueda aportar al modelo una decisión o probabilidad de si el pasajero sobreviviría o no).
-[TitanicData](/images/Step29.png)
+![TitanicData](/images/Step29.png)
 
 30. Dentro del menu izquierdo Manipulation en Data Transformation, buscar el módulo "Edit Metadata", agregarlo al lienzo y conectarlo con el módulo anterior.
 31. Dar clic en "Launch Column Selector" y seleccionar las columnas SibSp, Parch y Fare. Estas son las columnas que vamos a renombrar.
-[TitanicData](/images/Step31.png)
+![TitanicData](/images/Step31.png)
 32. En el menú derecho, vamos a colocar los nuevos nombres de las columnas: SiblingSpouse, ParentChild, FarePrice
-[TitanicData](/images/Step32.png)
+![TitanicData](/images/Step32.png)
 33. Agregamos y conectamos otro módulo de "Edit Metadata" y esta vez seleccionamos las columnas: Survived, Pclass, Sex, Embarked.
-[TitanicData](/images/Step33.png)
+![TitanicData](/images/Step33.png)
 34. Esta vez no solo vamos a renombar las columnas por Survived, PassengerClass, Gender, PortEmbarkation, sino que las vamos a convertir en variables categóricas.
-[TitanicData](/images/Step34.png)
+![TitanicData](/images/Step34.png)
 35. Agregamos y conectamos el módulo "Clean Missing Data". Escogemos todas las columnas y el modo de limpieza lo escogemos como "Remove entire row". Con esto eliminaremos las columnas que no tienen información y pueden perjudicar al entrenamiento del modelo.
-[TitanicData](/images/Step35.png)
+![TitanicData](/images/Step35.png)
 36. Dentro de Data Transformation, Sample and Split. Agregar y conectar el módulo "Split Data".
 37. En las propiedades del módulo, ingresamos el valor de 0.8 a "Fraction of Rows". Esto nos servirá para dividir nuestra información en un 80% para entrenar el modelo y en 20% para poder evaluarlo.
-[TitanicData](/images/Step37.png)
+![TitanicData](/images/Step37.png)
 38. En el menú izquierdo, dentro de Machine Learning, Initialize Model, Classification, agregar al lienzo el módulo "Two-class boosted decission tree"
-[TitanicData](/images/Step38.png)
+![TitanicData](/images/Step38.png)
 > Escogimos este módulo porque vamos a clasificar si un pasajero sobrevivió o no. Para conocer los demás modelos pre-cargados en Azure ML, puedes descargar de esta liga un PDF con los modelos y cuándo los puedes usar. [Azure ML Cheat Sheet](https://docs.microsoft.com/en-us/azure/machine-learning/studio/algorithm-cheat-sheet)
 
 39. Dentro de Machine Learning, Train, escoger el módulo "Train Model" y agregarlo al lienzo. Lo vamos a conectar Two-class boosted decission y con la primera salida de "Split Data". Como aparece en la imagen
-[TitanicData](/images/Step39.png)
+![TitanicData](/images/Step39.png)
 40. En "Launch column selector" de Train Model, vamos a seleccionar la columna "Survived" para indicar que es lo que queremos aprender.
 41. Agregamos un módulo "Score Model" y "Evaluate Model" y los conectamos como en la siguiente imagen.
-[TitanicData](/images/Step41.png)
+![TitanicData](/images/Step41.png)
 42. Damos clic en Run.
 43. Una vez que nuestro modelo se ha entrenado, damos clic en "Set Up Web Service" y seleccionamos la opción "Predictive Web Service [Recommended]"
-[TitanicData](/images/Step43.png)
+![TitanicData](/images/Step43.png)
 44. Así queda nuestro experimento como Web Service
-[TitanicData](/images/Step44.png)
+![TitanicData](/images/Step44.png)
 > Vamos a modificar un poco este experimento para poder enviar la información de regreso a SQL Server
 
 45. Mover el módulo Select columns in dataset abajo de los módulos Edit Metadata como aparece en la imagen:
-[TitanicData](/images/Step45.png)
+![TitanicData](/images/Step45.png)
 46. Agregar otro módulo "Select Columns in Dataset" y conectarlo al último "Select Metadata"
-[TitanicData](/images/Step46.png)
+![TitanicData](/images/Step46.png)
 47. Agregamos un módulo "Add Columns" y lo conectamos como en la siguiente imagen
-[TitanicData](/images/Step47.png)
+![TitanicData](/images/Step47.png)
 48. Agregamos un módulo "Export Data" y lo conectamos a "Add Columns"
 49. Configuramos el módulo "Export Data" para enviar la información a nuestra base de datos SQL Azure.
-[TitanicData](/images/Step49.png)
+![TitanicData](/images/Step49.png)
 50. Seleccionamos la opción "Accept any server certificate"
 51. En comma separated list ponemos la siguiente lista (Las columnas de nuestro modelo): PassengerId, Name, Ticket, Cabin, Survived, PassengerClass, Gender, Age, SiblingSpouse, ParentChild, FarePrice, PortEmbarkation, Scored Probabilities
 52. Poner el nombre de la tabla. Si estás siguiendo el ejemplo con los scripts, la tabla es "TitanicDataScored"
 53. Comma Separated List (las columnas de la base de datos): PassengerId, Name, Ticket, Cabin, Survived, Pclass, Sex, Age, SibSp, Parch, Fare, Embarked, ScoredProbabilities
 54. Seleccionar la opción "Allow writter success.."
-[TitanicData](/images/Step54.png)
+![TitanicData](/images/Step54.png)
 55. Dar clic en Run.
 56. Dar clic en "Deploy web Service"
 
@@ -154,7 +154,7 @@ GO
 Azure ML realmente nos ayuda bastante aquí proporcionando código de muestra que podemos usar. 
 
 57. En la etiqueta de servicios web, dar clic en "Request/Response" y navegar hasta la parte inferior de la página. Ahí tenemos el código R para comenzar.
-[TitanicData](/images/Step57.png)
+![TitanicData](/images/Step57.png)
 
 > Los siguientes pasos a seguir son:
  * Extraer la información de SQL que no le hemos dado una probabilidad
@@ -162,19 +162,19 @@ Azure ML realmente nos ayuda bastante aquí proporcionando código de muestra qu
 > Para esto, necesitamos configurar un ODBC para podernos ocnectar a SQL desde R
 
 58. Abrir la aplicación "ODBC Data Source Administrator"
-[TitanicData](/images/Step58.png)
+![TitanicData](/images/Step58.png)
 
 59. Dar clic en "Add" y escoger "ODBC Driver 11 for SQL"
 60. Poner de nombre "SQLAzure" y poner la URL de nuestro servidor en Azure (<servername>.database.windows.net)
 61. Dar clic en "Next" y seleccionar "With SQL Authentication". Poner las credenciales.
 62. Dar clic en "Finish" y "Test Connectivity". Si las credenciales fueron correctas, te aparecerá un mensaje de éxito.
-[TitanicData](/images/Step62.png)
+![TitanicData](/images/Step62.png)
 
 > Ahora vamos a obtener las credenciales de nuestro web service para poder configurar el código de R
 63. Regresar al experimento en AzureML y obtener el valor API Key
-[TitanicData](/images/Step63.png)
+![TitanicData](/images/Step63.png)
 64. En el paso 57 revisamos el código R que nos da AzureML, navegamos a la función curlPerform y obtenemos la URL.
-[TitanicData](/images/Step65.png)
+![TitanicData](/images/Step65.png)
 65. Abrimos RStudio
 66. Creamos un nuevo RScript y colocamos el siguiente código
 > Tenemos que modificar la conexión a nuestro SQL Server con nuestras credenciales, el API Key y la URL de nuestro servicio.
@@ -280,7 +280,7 @@ close(conn)
 ```
 67. Dar clic en Run para validar cada uno de los pasos en el script. Una vez que el script esté listo y configurado, vamos a hacer este proceso desde PowerBI.
 68. Abrir PowerBI y seleccionar como fuente de datos "RScript"
-[TitanicData](/images/Step68.png)
+![TitanicData](/images/Step68.png)
 69. Pega el script de R que configuraste en los pasos anteriores.
 70. Ya cuentas con la información para poder comenzar a hacer tu tablero! Intenta generar algunas gráficas. Este es el tablero que yo creé.
-[TitanicData](/images/Step68.png)
+![TitanicData](/images/Step68.png)
