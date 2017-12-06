@@ -1,0 +1,1 @@
+imágenes de la carpeta
