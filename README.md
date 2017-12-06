@@ -283,4 +283,4 @@ close(conn)
 ![TitanicData](/images/Step68.png)
 69. Pega el script de R que configuraste en los pasos anteriores.
 70. Ya cuentas con la información para poder comenzar a hacer tu tablero! Intenta generar algunas gráficas. Este es el tablero que yo creé.
-![TitanicData](/images/Step68.png)
+![TitanicData](/images/Step70.png)
