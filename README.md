@@ -14,7 +14,7 @@ En esta fase, vamos a crear una base de datos local con datos de prueba, y vamos
 
 1. Abrir SQL Server Management Studio y concectarse a sus ervidor local.
 2. Crear una base de datos con el nombre "TitanicDB".
-3. Descargar el siguiente archivo csv que tiene la información prueba con la que vamos a trabajar. [Titanic info](https://microsoft-my.sharepoint.com/:f:/p/vianej/Et_TgCHYa6VKvRg8LSE1tFgBj0WalO380zPZDzvBnsM7Dw?e=02369954f08743df9c93ac780ced2b93)
+3. Descargar el siguiente archivo csv que tiene la información prueba con la que vamos a trabajar. [Titanic info](/TitanicData.csv)
 4. Regresar a SQL Server Management Studio y dar clic derecho en nuestra base de datos "TitanicDB".
 5. Dar clic en "Tasks" y dar clic en "Import Flat File".
 6. Seleccionar la ruta del archivo que acabamos de descargar y escoger el noombre de la tabla TitanicData
