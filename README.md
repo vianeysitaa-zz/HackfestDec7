@@ -216,25 +216,15 @@ if(nrow(dataset)>0)
   h = basicTextGatherer()
   hdr = basicHeaderGatherer()
   
-  req =  list(
+  req = list(
+    
     Inputs = list(
-      "input1"= list(
-        list(
-          'PassengerId' = "1",
-          'Survived' = "1",
-          'Pclass' = "1",
-          'Name' = "",
-          'Sex' = "",
-          'Age' = "1",
-          'SibSp' = "1",
-          'Parch' = "1",
-          'Ticket' = "",
-          'Fare' = "1",
-          'Cabin' = "",
-          'Embarked' = ""
-        )
-      )
-    ),
+      
+      
+      "input1" = list(
+        "ColumnNames" = list("PassengerId", "Survived", "Pclass", "Name", "Sex", "Age", "SibSp", "Parch", "Ticket", "Fare", "Cabin", "Embarked"),
+        "Values" = createList(dataset)
+      )                ),
     GlobalParameters = setNames(fromJSON('{}'), character(0))
   )
   
